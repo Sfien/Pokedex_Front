@@ -9,7 +9,7 @@ function PokemonList() {
     const getPokemons = async () => {
       try {
         const data = await fetchPokemonList();
-        setPokemons(data);
+        setPokemons(data);  // 确保数据结构符合预期
       } catch (error) {
         console.error("Failed to fetch Pokémon list", error);
       }
