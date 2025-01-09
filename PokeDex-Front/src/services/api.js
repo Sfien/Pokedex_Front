@@ -1,4 +1,4 @@
-// src/utils/api.js
+// src/services/api.js
 const BASE_URL = "https://127.0.0.1:38155"; // 后端地址
 
 // 获取宝可梦列表
