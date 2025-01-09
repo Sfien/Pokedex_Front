@@ -1,5 +1,5 @@
 // src/utils/api.js
-const BASE_URL = "https://shiny-couscous-69r9xg7wp6qxc464p-3000.app.github.dev/ "; // 后端地址
+const BASE_URL = "https://127.0.0.1:38155"; // 后端地址
 
 // 获取宝可梦列表
 export const fetchPokemonList = async () => {
