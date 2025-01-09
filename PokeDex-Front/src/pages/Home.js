@@ -1,4 +1,3 @@
-// src/pages/Home.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PokemonCard from "../components/PokemonCard";
@@ -9,13 +8,13 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // liste des pokemons
+    // 获取宝可梦列表数据
     fetchPokemonList()
-      .then((data) => setPokemonList(data))
+      .then((data) => setPokemonList(data))  // 设置宝可梦数据
       .catch((err) => console.error("Failed to fetch Pokémon list:", err));
   }, []);
 
-  // aller ver la page de détail
+  // 跳转到宝可梦详情页面
   const handleCardClick = (id) => {
     navigate(`/pokemon/${id}`);
   };
@@ -28,7 +27,7 @@ function Home() {
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            onClick={() => handleCardClick(pokemon.id)}
+            onClick={() => handleCardClick(pokemon.id)}  // 点击卡片跳转到详情页
           />
         ))}
       </div>
