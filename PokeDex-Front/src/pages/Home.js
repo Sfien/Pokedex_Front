@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PokemonCard from "../components/PokemonCard";
 import { fetchPokemonList } from "../services/api";
 
-function HomePage() {
+function Home() {
   const [pokemonList, setPokemonList] = useState([]);
   const navigate = useNavigate();
 
