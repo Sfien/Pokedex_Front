@@ -1,18 +1,14 @@
-// src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import DetailsPage from "./pages/DetailsPage";
+import HomePage from "./pages/Home";  // 首页组件
+import DetailsPage from "./pages/DetailsPage";  // 详情页组件
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Accueil: liste des pokemons */}
-        <Route path="/" element={<HomePage />} />
-
-        {/* Page de détail: toutes les infos de ce pokemon */}
-        <Route path="/pokemon/:id" element={<DetailsPage />} />
+        <Route path="/" element={<HomePage />} />  {/* 首页路由 */}
+        <Route path="/pokemon/:id" element={<DetailsPage />} />  {/* 详情页路由，带有 id 参数 */}
       </Routes>
     </Router>
   );

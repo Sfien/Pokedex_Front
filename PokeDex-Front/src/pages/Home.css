@@ -1,17 +1,30 @@
-.home {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .home h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  .pokemon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    justify-items: center;
-  }
-  
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";  // 用于导航
+import PokemonCard from "../components/PokemonCard";  // 宝可梦卡片组件
+
+function Home() {
+  const [pokemons, setPokemons] = useState([]);
+
+  // 获取宝可梦列表
+  useEffect(() => {
+    fetch("http://localhost:3000/api/pokemons")
+      .then(response => response.json())
+      .then(data => setPokemons(data))
+      .catch(error => console.error("Error fetching Pokémon:", error));
+  }, []);
+
+  return (
+    <div>
+      <h1>Pokémon List</h1>
+      <div className="pokemon-list">
+        {pokemons.map(pokemon => (
+          <Link to={`/pokemon/${pokemon.id}`} key={pokemon.id}>
+            <PokemonCard pokemon={pokemon} />
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Home;
