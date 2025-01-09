@@ -7,7 +7,7 @@ export const fetchPokemonList = async () => {
   if (!response.ok) {
     throw new Error("Failed to fetch Pokémon list");
   }
-  return response.json();
+  return response.json();  // 返回 JSON 数据
 };
 
 // 获取宝可梦详情
@@ -16,5 +16,5 @@ export const fetchPokemonDetails = async (id) => {
   if (!response.ok) {
     throw new Error("Failed to fetch Pokémon details");
   }
-  return response.json();
+  return response.json();  // 返回 JSON 数据
 };
