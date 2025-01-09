@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";  // 导入 Link 组件
 import "./PokemonCard.css";
 
 function PokemonCard({ pokemon, onClick }) {
