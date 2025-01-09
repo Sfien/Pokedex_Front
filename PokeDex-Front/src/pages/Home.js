@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { fetchPokemons } from '../services/api';  // 引入 API 请求
-import PokemonCard from '../components/PokemonCard';  // 引入展示卡片组件
-import './Home.css';  // 引入样式文件
+// src/pages/HomePage.js
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PokemonCard from "../components/PokemonCard";
+import { fetchPokemonList } from "../services/api";
 
-const Home = () => {
-  const [pokemons, setPokemons] = useState([]);
+function HomePage() {
+  const [pokemonList, setPokemonList] = useState([]);
+  const navigate = useNavigate();
 
-  // 请求宝可梦数据
   useEffect(() => {
-    const loadPokemons = async () => {
-      const data = await fetchPokemons();
-      setPokemons(data);
-    };
-
-    loadPokemons();
+    // liste des pokemons
+    fetchPokemonList()
+      .then((data) => setPokemonList(data))
+      .catch((err) => console.error("Failed to fetch Pokémon list:", err));
   }, []);
 
+  // aller ver la page de détail
+  const handleCardClick = (id) => {
+    navigate(`/pokemon/${id}`);
+  };
+
   return (
-    <div className="home">
+    <div className="home-page">
       <h1>Pokedex</h1>
       <div className="pokemon-grid">
-        {pokemons.map((pokemon, index) => (
-          <PokemonCard key={index} pokemon={pokemon} />
+        {pokemonList.map((pokemon) => (
+          <PokemonCard
+            key={pokemon.id}
+            pokemon={pokemon}
+            onClick={() => handleCardClick(pokemon.id)}
+          />
         ))}
       </div>
     </div>
   );
-};
+}
 
-export default Home;
+export default HomePage;

@@ -1,13 +1,21 @@
-import React from 'react';
-import Home from './pages/Home';  // 引入首页组件
-import './App.css';  // 引入样式文件
+// src/App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import DetailsPage from "./pages/DetailsPage";
 
-const App = () => {
+function App() {
   return (
-    <div className="app">
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        {/* Accueil: liste des pokemons */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* Page de détail: toutes les infos de ce pokemon */}
+        <Route path="/pokemon/:id" element={<DetailsPage />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;

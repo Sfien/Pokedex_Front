@@ -1,22 +1,22 @@
 .pokemon-card {
-    width: 150px;
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .pokemon-image {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-  }
-  
-  .pokemon-name {
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 8px;
-  }
-  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-card img {
+  max-width: 100px;
+  height: auto;
+}
+
+.pokemon-card h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}

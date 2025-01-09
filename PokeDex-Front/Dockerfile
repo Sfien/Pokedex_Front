@@ -1,15 +1,14 @@
-FROM node:18-alpine
+# 使用官方 Nginx 镜像
+FROM nginx:latest
 
-WORKDIR /app
+# 将 React 构建产物复制到 Nginx HTML 目录
+COPY build/ /usr/share/nginx/html
 
-COPY package.json package-lock.json ./
+# 添加自定义 Nginx 配置文件
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN npm install
+# 暴露端口
+EXPOSE 80
 
-COPY . .
-
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# 启动 Nginx 服务
+CMD ["nginx", "-g", "daemon off;"]

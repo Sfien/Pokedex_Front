@@ -1,13 +1,20 @@
-import axios from 'axios';
+// src/utils/api.js
+const BASE_URL = "https://shiny-couscous-69r9xg7wp6qxc464p-3000.app.github.dev/ "; // 后端地址
 
-const BASE_URL = 'http://backend:5000/api/pokemon';  // 后端容器名称 + 端口
-
-export const fetchPokemons = async () => {
-  try {
-    const response = await axios.get(BASE_URL);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching Pokémon data:', error);
-    return [];
+// 获取宝可梦列表
+export const fetchPokemonList = async () => {
+  const response = await fetch(`${BASE_URL}/pokemons`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch Pokémon list");
   }
+  return response.json();
+};
+
+// 获取宝可梦详情
+export const fetchPokemonDetails = async (id) => {
+  const response = await fetch(`${BASE_URL}/pokemons/${id}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch Pokémon details");
+  }
+  return response.json();
 };

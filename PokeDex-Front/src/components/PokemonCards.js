@@ -1,13 +1,14 @@
-import React from 'react';
-import './PokemonCard.css';  // 引入样式文件
+// src/components/PokemonCard.js
+import React from "react";
+import "./PokemonCard.css";
 
-const PokemonCard = ({ pokemon }) => {
+function PokemonCard({ pokemon, onClick }) {
   return (
-    <div className="pokemon-card">
-      <img src={pokemon.sprites.front_default} alt={pokemon.name} className="pokemon-image" />
-      <h3 className="pokemon-name">{pokemon.name}</h3>
+    <div className="pokemon-card" onClick={onClick}>
+      <img src={pokemon.image} alt={pokemon.name} />
+      <h3>{pokemon.name}</h3>
     </div>
   );
-};
+}
 
 export default PokemonCard;
