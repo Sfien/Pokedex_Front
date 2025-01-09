@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchPokemonList } from "../services/api";  // 从正确的路径导入
+import PokemonCard from "./PokemonCard";  // 导入 PokemonCard 组件
 
 function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
@@ -21,10 +22,7 @@ function PokemonList() {
       <h2>Pokémon List</h2>
       <div className="pokemon-list">
         {pokemons.map((pokemon) => (
-          <div key={pokemon.id} className="pokemon-card">
-            <img src={pokemon.image} alt={pokemon.name} />
-            <h3>{pokemon.name}</h3>
-          </div>
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />  {/* 渲染每个 PokemonCard */}
         ))}
       </div>
     </div>
