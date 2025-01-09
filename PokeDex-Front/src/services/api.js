@@ -1,5 +1,5 @@
 // src/services/api.js
-const BASE_URL = "https://127.0.0.1:38155"; // 后端地址
+const BASE_URL = "https://musical-space-robot-v66p66jj4454hpqgx-33099.app.github.dev/"; // 后端地址"https://127.0.0.1:38155"
 
 // 获取宝可梦列表
 export const fetchPokemonList = async () => {
