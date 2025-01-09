@@ -1,4 +1,4 @@
-// src/pages/HomePage.js
+// src/pages/Home.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PokemonCard from "../components/PokemonCard";
@@ -36,4 +36,4 @@ function Home() {
   );
 }
 
-export default HomePage;
+export default Home;
