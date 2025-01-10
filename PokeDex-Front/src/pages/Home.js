@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getPokemon } from '../services/api';
+import { getPokemon } from '../services/api'; // 假设这是你的 API 调用文件
 
 const Home = () => {
     const [pokemon, setPokemon] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Utiliser useEffect pour récupérer les données de Pokémon
     useEffect(() => {
         getPokemon()
             .then(data => {
-                setPokemon(data.data); // Supposons que la réponse de l'API soit de la forme { success: true, data: [...] }
+                setPokemon(data.data); // 假设 API 返回的数据形如 { success: true, data: [...] }
                 setLoading(false);
             })
             .catch(err => {
@@ -19,7 +18,6 @@ const Home = () => {
             });
     }, []);
 
-    // Gestion de l'état de chargement et des erreurs
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>Erreur : {error}</p>;
 
@@ -27,8 +25,15 @@ const Home = () => {
         <div>
             <h1>Liste des Pokémon</h1>
             <ul>
-                {pokemon.map(pokemon => (
-                    <li key={pokemon.id}>{pokemon.name}</li>
+                {pokemon.map(p => (
+                    <li key={p.id}>
+                        <p>{p.name}</p>
+                        <img 
+                            src={p.image}  // 使用 image 字段的 URL
+                            alt={p.name}
+                            style={{ width: '150px', height: '150px', objectFit: 'cover' }} 
+                        />
+                    </li>
                 ))}
             </ul>
         </div>
