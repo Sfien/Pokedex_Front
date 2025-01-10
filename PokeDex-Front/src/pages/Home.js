@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import PokemonCard from "../components/PokemonCard";
-import { fetchPokemonList } from "../services/api";
+import React, { useState, useEffect } from 'react';
+import { getPokemon } from '../services/api';
 
-function Home() {
-  const [pokemonList, setPokemonList] = useState([]);
-  const navigate = useNavigate();
+const Home = () => {
+    const [pokemon, setPokemon] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // 获取宝可梦列表数据
-    fetchPokemonList()
-      .then((data) => setPokemonList(data))  // 设置宝可梦数据
-      .catch((err) => console.error("Failed to fetch Pokémon list:", err));
-  }, []);
+    // Utiliser useEffect pour récupérer les données de Pokémon
+    useEffect(() => {
+        getPokemon()
+            .then(data => {
+                setPokemon(data.data); // Supposons que la réponse de l'API soit de la forme { success: true, data: [...] }
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
 
-  // 跳转到宝可梦详情页面
-  const handleCardClick = (id) => {
-    navigate(`/pokemon/${id}`);
-  };
+    // Gestion de l'état de chargement et des erreurs
+    if (loading) return <p>Chargement...</p>;
+    if (error) return <p>Erreur : {error}</p>;
 
-  return (
-    <div className="home-page">
-      <h1>Pokedex</h1>
-      <div className="pokemon-grid">
-        {pokemonList.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            onClick={() => handleCardClick(pokemon.id)}  // 点击卡片跳转到详情页
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+    return (
+        <div>
+            <h1>Liste des Pokémon</h1>
+            <ul>
+                {pokemon.map(pokemon => (
+                    <li key={pokemon.id}>{pokemon.name}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default Home;

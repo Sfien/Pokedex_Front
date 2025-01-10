@@ -1,31 +1,46 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";  // 用于获取路由参数
+import React, { useState, useEffect } from 'react';
 
-function DetailsPage() {
-  const { id } = useParams();  // 获取路由中的 id 参数
-  const [pokemon, setPokemon] = useState(null);
+const DetailsPage = ({ pokemonId }) => {
+    const [pokemon, setPokemon] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  // 获取宝可梦详情数据
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/pokemons/${id}`)
-      .then(response => response.json())
-      .then(data => setPokemon(data))
-      .catch(error => console.error("Error fetching Pokémon details:", error));
-  }, [id]);
+    useEffect(() => {
+        // Obtenir les détails du Pokémon depuis l'API backend
+        fetch(`http://localhost:3000/pokemon/${pokemonId}`)
+            .then(response => response.json())
+            .then(data => {
+                setPokemon(data.data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, [pokemonId]);
 
-  // 如果没有数据，显示加载状态
-  if (!pokemon) {
-    return <div>Loading...</div>;
-  }
+    if (loading) return <p>Chargement...</p>;
+    if (error) return <p>Erreur: {error}</p>;
+    if (!pokemon) return <p>Aucun Pokémon trouvé.</p>;
 
-  return (
-    <div>
-      <h1>{pokemon.name}</h1>
-      <img src={pokemon.image} alt={pokemon.name} />
-      <p>Type: {pokemon.type}</p>
-      {/* 你可以根据需要添加更多的宝可梦详细信息 */}
-    </div>
-  );
-}
+    return (
+        <div>
+            <h1>{pokemon.name}</h1>
+            <img src={pokemon.image} alt={pokemon.name} />
+
+            <h2>Information détails</h2>
+            <ul>
+                <li><strong>ID:</strong> {pokemon.id}</li>
+                <li><strong>Type:</strong> {pokemon.type.join(', ')}</li>
+                <li><strong>HP:</strong> {pokemon.stats.hp}</li>
+                <li><strong>Attack:</strong> {pokemon.stats.attack}</li>
+                <li><strong>Defense:</strong> {pokemon.stats.defense}</li>
+                <li><strong>Special Attack:</strong> {pokemon.stats.special_attack}</li>
+                <li><strong>Special Defense:</strong> {pokemon.stats.special_defense}</li>
+                <li><strong>Speed:</strong> {pokemon.stats.speed}</li>
+            </ul>
+        </div>
+    );
+};
 
 export default DetailsPage;

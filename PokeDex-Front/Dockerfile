@@ -1,14 +1,21 @@
-# 使用官方 Nginx 镜像
-FROM nginx:latest
+# Utiliser l'image officielle de Node.js
+FROM node:16
 
-# 将 React 构建产物复制到 Nginx HTML 目录
-COPY build/ /usr/share/nginx/html
+# Définir le répertoire de travail
+WORKDIR /usr/src/app
 
-# 添加自定义 Nginx 配置文件
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copier package.json et installer les dépendances
+COPY package*.json ./
+RUN npm install
 
-# 暴露端口
-EXPOSE 80
+# Copier tout le code source
+COPY . .
 
-# 启动 Nginx 服务
-CMD ["nginx", "-g", "daemon off;"]
+# Construire la version de production
+RUN npm run build
+
+# Exposer le port
+EXPOSE 3000
+
+# Lancer l'application
+CMD ["npm", "start"]
