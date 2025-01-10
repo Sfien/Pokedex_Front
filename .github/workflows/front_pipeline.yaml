@@ -24,4 +24,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/liyuanfan:latest  # 替换为你的 Docker Hub 仓库名称
+        tags: ${{ secrets.DOCKER_USERNAME }}/front_pokemons:latest  # 替换为你的 Docker Hub 仓库名称
